@@ -1,29 +1,4 @@
 {
   "warnings": [
-    {
-      "companyHash": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-      "dose": "",
-      "medicine": "",
-      "productionLocation": "",
-      "provider": "Pfizer",
-      "manufactureDateStart": "",
-      "manufactureDateEnd": "",
-      "title": "Drug!",
-      "severity": "1",
-      "description": "drug."
-    },
-    {
-      "companyHash": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-      "title": "Test",
-      "severity": "1",
-      "description": "Test"
-    },
-    {
-      "companyHash": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-      "medicine": "Benzo",
-      "title": "Over Dose",
-      "severity": "3",
-      "description": "Too much drugs"
-    }
   ]
 }

@@ -2,23 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, QrCode } from "lucide-react";
+import { Search } from "lucide-react";
 import { toast } from "sonner";
 
-const CompactHashInput = () => {
+const CompactHashInput = ({ searchButtonClass = "", inputClass = "" }) => {
   const [hash, setHash] = useState("");
   const navigate = useNavigate();
 
   const handleVerify = () => {
-    if (!hash.trim()) {
-      toast.error("Please enter a valid hash");
-      return;
-    }
-    navigate(`/verify/${hash.trim()}`);
-  };
-
-  const handleScanQR = () => {
-    toast.info("QR Scanner feature coming soon");
+    const trimmed = hash.trim();
+    navigate(`/verify/${trimmed}`);
   };
 
   return (
@@ -26,22 +19,15 @@ const CompactHashInput = () => {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 w-full py-2">
         <Input
           type="text"
-          placeholder="Enter verification code"
+          placeholder="Enter verification code (start with #)"
           value={hash}
           onChange={(e) => setHash(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleVerify()}
-          className="h-12 text-base sm:text-xl px-4 sm:px-8 w-full sm:w-[48rem]"
+          className={inputClass || "h-16 text-lg sm:text-2xl px-6 sm:px-12 w-full sm:w-[64rem] rounded-xl border-2 border-primary"}
         />
-        <div className="flex gap-2 sm:gap-4 mt-2 sm:mt-0 w-full sm:w-auto">
-          <Button onClick={handleVerify} size="lg" className="h-12 text-base sm:text-xl px-6 sm:px-10 w-full sm:w-auto">
-            <Search className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
-            <span className="hidden sm:inline">Verify</span>
-            <span className="sm:hidden">Go</span>
-          </Button>
-          <Button onClick={handleScanQR} variant="outline" size="lg" className="h-12 w-12">
-            <QrCode className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Button>
-        </div>
+        <Button onClick={handleVerify} size="icon" className={searchButtonClass || "h-16 w-16 text-2xl rounded-full flex items-center justify-center"}>
+          <Search className="w-7 h-7 mx-auto" />
+        </Button>
       </div>
     </div>
   );

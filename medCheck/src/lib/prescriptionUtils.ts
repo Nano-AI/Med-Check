@@ -73,11 +73,11 @@ export class PrescriptionUtils {
     return await this.contract.verifyPrescription(hash);
   }
 
-  async addPrescription(hash: string, medicineName: string, dosage: string) {
+  async addPrescription(hash: string, medicineName: string, dosage: string, provider: string) {
     // For demo, use first account as signer
     const signer = await this.provider.getSigner(0);
     const contractWithSigner = this.contract.connect(signer);
-    return await (contractWithSigner as any).addPrescription(hash, medicineName, dosage);
+    return await contractWithSigner.addPrescription(hash, medicineName, dosage, provider);
   }
 
   static createPrescriptionHash(medicineName: string, dosage: string, provider: string = "", patientId: string = "patient123") {
