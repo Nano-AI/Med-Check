@@ -67,3 +67,10 @@ cd medCheck
 npm i
 npm run dev
 ```
+
+Change contract address in `medCheck/src/lib/prescriptionUtils.ts` to address printed in `Terminal 3` from the ignition deploy.
+
+Install `MetaMask` to manage wallet keys. Select `Add Wallet or Account`, then `Import Account`, and paste a private key from one of the populated accounts from `Terminal 
+
+Install `MetaMask` to manage wallet keys. Select `Add Wallet or Account`, then `Import Account`, and paste a private key from one of the populated accounts from `Terminal 2`.
+Then, scroll down to the cryptocurrency select, click `Custom`, and click `Add Custom Network`. Paste the `Network Name` as `127.0.0.1:8545`, `Chain ID` as `31337`, and `Currency Symbol` as `ETH`. Ignore any suggestions and save it.
