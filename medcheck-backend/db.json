@@ -1,4 +1,11 @@
 {
   "warnings": [
+    {
+      "companyHash": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "medicine": "Adderall",
+      "title": "Under Dosing Issue",
+      "severity": "2",
+      "description": "Several things were underdosed. "
+    }
   ]
 }

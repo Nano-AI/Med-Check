@@ -19,7 +19,7 @@ const CompactHashInput = ({ searchButtonClass = "", inputClass = "" }) => {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 w-full py-2">
         <Input
           type="text"
-          placeholder="Enter verification code (start with #)"
+          placeholder="Enter hash"
           value={hash}
           onChange={(e) => setHash(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleVerify()}
