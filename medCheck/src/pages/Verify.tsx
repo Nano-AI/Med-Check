@@ -15,6 +15,7 @@ import {
   AlertTriangle
 } from "lucide-react";
 import { PrescriptionUtils } from "@/lib/prescriptionUtils";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 const prescriptionUtils = new PrescriptionUtils();
 
@@ -23,6 +24,7 @@ const Verify = () => {
   const navigate = useNavigate();
   const [prescription, setPrescription] = useState<any | null>(null);
   const [message, setMessage] = useState("");
+  const [warnings, setWarnings] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchPrescription = async () => {
@@ -43,6 +45,19 @@ const Verify = () => {
     };
     fetchPrescription();
   }, [hash]);
+
+  useEffect(() => {
+    // Query backend for warnings matching prescription medicine and company hash
+    if (prescription && prescription[0] && prescription[3]) {
+      const medicine = encodeURIComponent(prescription[0]);
+      const companyHash = encodeURIComponent(prescription[3]); // 'Added By' is companyHash
+      fetch(`http://localhost:3001/warnings?companyHash=${companyHash}&medicine=${medicine}`)
+        .then(res => res.json())
+        .then(data => setWarnings(data));
+    } else {
+      setWarnings([]);
+    }
+  }, [prescription]);
 
   if (!prescription) {
     return (
@@ -79,7 +94,37 @@ const Verify = () => {
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
           </div>
-
+          {/* Warnings Section - show at top */}
+          {warnings.length > 0 && (
+            <div className="mt-4">
+              <h2 className="text-lg font-bold mb-2">Related Warnings</h2>
+              <Accordion type="single" collapsible className="bg-white rounded-lg shadow p-4">
+                {warnings.map((w, idx) => (
+                  <AccordionItem key={idx} value={String(idx)} className="border-b last:border-b-0">
+                    <AccordionTrigger className="py-3 px-2 hover:bg-gray-50 rounded transition flex items-center justify-between">
+                      <div className="flex items-center justify-between w-full">
+                        <span className="font-bold text-destructive mr-2 text-lg">{w.title}</span>
+                        <Badge className={w.severity === 1 || w.severity === "1" ? "bg-destructive text-destructive-foreground" : w.severity === 2 || w.severity === "2" ? "bg-orange-500 text-white" : "bg-primary text-primary-foreground"}>
+                          {w.severity === 1 || w.severity === "1" ? "High" : w.severity === 2 || w.severity === "2" ? "Medium" : "Low"}
+                        </Badge>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="bg-gray-50 rounded-b-lg p-4">
+                      <div className="text-muted-foreground text-base mb-2">{w.description}</div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                        <div><span className="font-semibold">Company Hash:</span> <span className="break-all">{w.companyHash}</span></div>
+                        <div><span className="font-semibold">Dose:</span> {w.dose}</div>
+                        <div><span className="font-semibold">Production Location:</span> {w.productionLocation}</div>
+                        <div><span className="font-semibold">Provider:</span> <span className="break-all">{w.provider}</span></div>
+                        <div><span className="font-semibold">Manufacture Date Range:</span> {w.manufactureDateStart} - {w.manufactureDateEnd}</div>
+                        <div><span className="font-semibold">Medicine:</span> {w.medicine}</div>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          )}
           {/* Main Info Card */}
           <Card className="p-4 sm:p-8 shadow-xl border-verified/20">
             <div className="space-y-4 sm:space-y-6">
@@ -131,7 +176,7 @@ const Verify = () => {
                   </div>
                   <div>
                     <p className="text-xs sm:text-sm text-muted-foreground">Added By</p>
-                    <p className="font-semibold text-foreground text-sm sm:text-base break-words max-w-[180px] sm:max-w-none">{prescription[3]}</p>
+                    <p className="font-semibold text-foreground text-sm sm:text-base">{prescription[3]}</p>
                   </div>
                 </div>
                 {/* Verified */}
@@ -155,7 +200,6 @@ const Verify = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-white mt-2 break-all">Tx Hash: {hash}</p>
             </div>
           </Card>
         </div>

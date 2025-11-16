@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Verify from "./pages/Verify";
 import NotFound from "./pages/NotFound";
 import Admin from "@/components/Admin";
+import Warning from "@/components/Warning";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/verify/:hash" element={<Verify />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/add" element={<Admin />} />
+            <Route path="/admin/warnings" element={<Warning />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
