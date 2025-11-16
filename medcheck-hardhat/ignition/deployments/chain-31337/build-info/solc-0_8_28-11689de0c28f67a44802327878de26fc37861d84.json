@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-11689de0c28f67a44802327878de26fc37861d84",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/PrescriptionBlockchain.sol": "project/contracts/PrescriptionBlockchain.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/PrescriptionBlockchain.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract PrescriptionBlockchain {\n    struct Prescription {\n        string medicineName;\n        string dosage; // Changed from uint256 to string\n        uint256 timestamp;\n        address addedBy;\n        bool exists;\n        string provider; // Renamed from company to provider\n    }\n\n    mapping(bytes32 => Prescription) public prescriptions;\n\n    event PrescriptionAdded(bytes32 indexed prescriptionHash, address indexed addedBy, uint256 timestamp);\n\n    address public owner;\n\n    modifier onlyOwner() {\n        require(msg.sender == owner, \"Only owner can call this function\");\n        _;\n    }\n\n    constructor() {\n        owner = msg.sender;\n    }\n\n    function addPrescription(\n        bytes32 prescriptionHash,\n        string memory medicineName,\n        string memory dosage, // Changed from uint256 to string\n        string memory provider // Added provider argument\n    ) public onlyOwner {\n        require(!prescriptions[prescriptionHash].exists, \"Prescription already exists\");\n\n        prescriptions[prescriptionHash] = Prescription({\n            medicineName: medicineName,\n            dosage: dosage,\n            timestamp: block.timestamp,\n            addedBy: msg.sender,\n            exists: true,\n            provider: provider // Set provider from argument\n        });\n\n        emit PrescriptionAdded(prescriptionHash, msg.sender, block.timestamp);\n    }\n\n    function getPrescription(bytes32 prescriptionHash) public view returns (\n        string memory medicineName,\n        string memory dosage, // Changed from uint256 to string\n        uint256 timestamp,\n        address addedBy,\n        bool exists,\n        string memory provider\n    ) {\n        Prescription memory pres = prescriptions[prescriptionHash];\n        return (\n            pres.medicineName,\n            pres.dosage,\n            pres.timestamp,\n            pres.addedBy,\n            pres.exists,\n            pres.provider\n        );\n    }\n\n    function verifyPrescription(bytes32 prescriptionHash) public view returns (bool) {\n        return prescriptions[prescriptionHash].exists;\n    }\n}"
+      }
+    }
+  }
+}
