@@ -1,5 +1,5 @@
 # MedCheck
-[YouTube Presentation](https://youtu.be/fAjWG8-LzMA?si=j0dDPDOYYdaCicj_)
+[YouTube Demo](https://youtu.be/cdb0WkGtaUc)
 ## Inspiration
 Prescription medication is no joke. Controlled substances need to be verified and proven authentic before it is safe for an individual to consume them. There have been a few cases where this has been an issue. 
 This year, there was a [nationwide recall of Adderall](https://www.thehealthy.com/news/adhd-medication-recall-september-2025/). 
