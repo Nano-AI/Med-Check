@@ -2,9 +2,9 @@
 [YouTube Demo](https://youtu.be/cdb0WkGtaUc)
 ## Inspiration
 Prescription medication is no joke. Controlled substances need to be verified and proven authentic before it is safe for an individual to consume them. There have been a few cases where this has been an issue. 
-This year, there was a [nationwide recall of Adderall](https://www.thehealthy.com/news/adhd-medication-recall-september-2025/). 
-[A 9 year-old was prescribed an opioid which was more powerful than morphine!](https://people.com/pharmacy-gives-9-year-old-opioids-instead-of-adhd-meds-11753383). 
-[580,000 bottles of a blood pressure drug were recalled due to cancer risks](https://www.cbsnews.com/news/blood-pressure-drug-recall-cancer-prazosin-hydrochloride-fda/)
+- This year, there was a [nationwide recall of Adderall](https://www.thehealthy.com/news/adhd-medication-recall-september-2025/). 
+- [A 9 year-old was prescribed an opioid which was more powerful than morphine!](https://people.com/pharmacy-gives-9-year-old-opioids-instead-of-adhd-meds-11753383). 
+- [580,000 bottles of a blood pressure drug were recalled due to cancer risks](https://www.cbsnews.com/news/blood-pressure-drug-recall-cancer-prazosin-hydrochloride-fda/)
 Errors in pharmaceutical drugs are no joke, and we wanted to help create an app that verified and ensured that users would be able to check and stay on top of any information related to their prescribed meds. 
 
 ### Why Blockchain
